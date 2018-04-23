@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 22/04/2018 13:03:35-->
+<!--Last exported: 23/04/2018 13:41:56-->
 <Tiled2Unity version="1.0.12.3">
   <AssignMaterial mesh="CharBedroom_mesh_0001" material="interior" />
   <AssignMaterial mesh="CharBedroom_mesh_0002" material="town_buildings" />
@@ -16,6 +16,13 @@
     <GameObject name="Walls" x="0" y="0" z="0">
       <TileLayer offsetX="0" offsetY="0" />
       <GameObject name="town_buildings" mesh="CharBedroom_mesh_0002" sortingLayerName="" sortingOrder="1" opacity="1" />
+      <GameObject name="Collision">
+        <PolygonCollider2D>
+          <Path>15.2,-2.4 17.6,-2.4 17.6,-0.8 15.2,-0.8</Path>
+          <Path>8,-0.8 0.8,-0.8 0.8,-2.4 8,-2.4</Path>
+          <Path>2.4,-8 15.2,-8 15.2,-6.4 2.4,-6.4</Path>
+        </PolygonCollider2D>
+      </GameObject>
     </GameObject>
     <GameObject name="Ceiling" x="0" y="0" z="0">
       <TileLayer offsetX="0" offsetY="0" />
@@ -39,11 +46,17 @@
       <GameObject name="Collision">
         <PolygonCollider2D>
           <Path>16,-1.6 15.2,-1.6 15.2,-2.4 16,-2.4</Path>
-          <Path>4,-1.6 1.6,-1.6 1.6,-3.2 4,-3.2</Path>
+          <Path>4.8,-1.6 1.6,-1.6 1.6,-3.2 4.8,-3.2</Path>
           <Path>8,-3.2 7.2,-3.2 7.2,-4 8,-4</Path>
           <Path>4.8,-4 4,-4 4,-4.8 4.8,-4.8</Path>
-          <Path>15.2,-7.2 2.4,-7.2 2.4,-8.8 15.2,-8.8</Path>
         </PolygonCollider2D>
+      </GameObject>
+    </GameObject>
+    <GameObject name="Object Layer 1" x="0" y="0" z="0">
+      <ObjectLayer offsetX="0" offsetY="0" color="#ff808080" />
+      <GameObject name="RectangleObject" x="2.375" y="-7.525" rotation="0" layer="">
+        <RectangleObjectComponent tmx-object-id="1" tmx-object-name="" tmx-object-type="" tmx-object-x="95" tmx-object-y="301" tmx-object-width="510" tmx-object-height="40" tmx-object-rotation="0" />
+        <BoxCollider2D width="12.75" height="1" />
       </GameObject>
     </GameObject>
   </Prefab>

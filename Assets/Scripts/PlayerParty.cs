@@ -22,7 +22,7 @@ public class PlayerParty : MonoBehaviour {
 			characters = new Character[5];
 			characters[0] = new Character(Global.playerName, 2, 10); //player
 			characters[1] = new Character(Global.fatherName, 40, 60); //father
-			characters[2] = new Character(Global.greenName, 2, 10); //green
+			characters[2] = new Character(Global.greenName, 3, 10); //green
 			characters[3] = new Character(Global.strangerName, 2, 10); //stranger
 			characters[4] = new Character(Global.friendName, 2, 10); //friend
 			//TODO re-set names in Global and in here if anything changes
@@ -32,6 +32,7 @@ public class PlayerParty : MonoBehaviour {
 		memberByName = new Dictionary<string, int>();
 		memberByName.Add(Global.playerName, 0);
 		memberByName.Add(Global.fatherName, 1);
+		memberByName.Add(Global.greenName, 2);
 		//TODO add other transforms
 	}
 
@@ -61,6 +62,7 @@ public class PlayerParty : MonoBehaviour {
 				if(members[i]){
 					character = characters[i];
 					Character[] enemyParty = BattleManager.GetEnemyMembers();
+					if(enemyParty.Length==0) break; //stop acting if enemy party is dead
 					BattleManager.SetAttacker(character);
 					BattleManager.SetTarget(enemyParty[Random.Range(0, enemyParty.Length)]);
 					yield return BattleManager.AttackTarget();

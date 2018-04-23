@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Car {
 	static GameObject instance;
@@ -50,5 +51,10 @@ public class Player : Car {
 	public static void SetPreviousPosition(Vector3 pos){
 		previousPosition = pos;
 		usePreviousPosition = true;
+	}
+
+	public static void Teleport(string scene, float x, float y){
+		SetPreviousPosition(new Vector2(x, y));
+		SceneManager.LoadScene(scene);
 	}
 }

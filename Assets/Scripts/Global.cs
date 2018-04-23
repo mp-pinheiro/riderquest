@@ -15,14 +15,19 @@ public class Global : MonoBehaviour {
 	public static string village2Name = "Village2";
 	public static string kingdomName = "Kingdom";
 	public static string forestName = "Forest";
+	public static string dungeon1Name = "Dungeon1";
 	public static string empty = "";
 	public static bool killedDeer = true;
-	public static bool fatherDied = false;
-	public static bool ancientAppears;
-	public static bool anotherBlack;
+	public static bool fatherDied = true;
+	public static bool ancientAppears = true;
+	public static bool anotherBlack = true;
+	public static bool talkedToAncient = true;
+	public static bool foundGreen = true;
+	public static bool greenJoins = true;
 
 	public static object GetValue(string key){
 		var field = typeof(Global).GetField(key);
 		return field.GetValue(null);
 	}
 }
+
