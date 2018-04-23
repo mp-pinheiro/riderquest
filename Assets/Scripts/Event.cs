@@ -100,6 +100,7 @@ public class Event : MonoBehaviour {
 		StartCoroutine(HouseAssaultRoutine());
 	}
 	IEnumerator HouseAssaultRoutine(){
+		CameraFollow.setMusic(Resources.Load<AudioClip>("Music/crisis"));
 		yield return MessageManager.ShowMessage(Global.fatherName, "Hey!");
 		yield return MessageManager.ShowMessage(Global.fatherName, "Son, go to " + Global.ancientName + "'s house.");
 		yield return MessageManager.ShowMessage(Global.playerName, "Dad, what's happening? Where is mom?");
