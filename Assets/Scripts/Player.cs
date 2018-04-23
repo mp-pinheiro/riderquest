@@ -21,6 +21,11 @@ public class Player : Car {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update();
+		if(Time.timeScale==0f){
+			StopTime();
+			return;
+		}
+
 		if(Input.GetKey(KeyCode.LeftArrow)){
 			TurnLeft();
 		}else if(Input.GetKey(KeyCode.RightArrow)){
@@ -30,15 +35,11 @@ public class Player : Car {
 		}
 		if(Input.GetKey(KeyCode.UpArrow)){
 			Accelerate();
+		}else{
+			StopAccelerating();
 		}
 		if(Input.GetKey(KeyCode.DownArrow)){
 			Reverse();
-		}
-
-		//reset
-		if(Input.GetKeyDown(KeyCode.R)){
-			rb.velocity = Vector2.zero;
-			rb.position = Vector2.zero;
 		}
 	}
 
