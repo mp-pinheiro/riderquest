@@ -15,6 +15,15 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void StartBattle(){
+		StartCoroutine(BattleRoutine());
+	}
+
+	IEnumerator BattleRoutine(){
+		AudioSource audio = GetComponent<AudioSource>();
+		audio.Play();
+		Time.timeScale = 0f;
+		yield return new WaitWhile (()=> audio.isPlaying);
+		Time.timeScale = 1f;
 		BattleManager.StartBattle(playerParty, enemyParty);
 	}
 }

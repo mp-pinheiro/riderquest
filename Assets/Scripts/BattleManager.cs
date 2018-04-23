@@ -7,8 +7,11 @@ public class BattleManager : MonoBehaviour {
 	public GameObject hit;
 	static bool hitting;
 	Animator anim;
+	AudioSource hitAudio;
 	public static GameObject playerParty;
 	public static GameObject enemyParty;
+	public GameObject tempGambPrefab;
+	public GameObject tempGambPrefab2;
 	static string previousScene;
 	static Character chosenTarget;
 	static Character attacker;
@@ -31,15 +34,16 @@ public class BattleManager : MonoBehaviour {
 	void Awake(){
 		instance = this;
 		anim = hit.GetComponent<Animator>();
+		hitAudio = hit.GetComponent<AudioSource>();
 	}
 
 	void Start(){
-		/*
+		//*
 		//TODO deleta isso
-		playerParty = tempGambPrefab;
-		enemyParty = tempGambPrefab2;
-		previousScene = "home";
-		*/
+		if(playerParty==null) playerParty = tempGambPrefab;
+		if(enemyParty==null) enemyParty = tempGambPrefab2;
+		if(previousScene==null) previousScene = "overworld";
+		//*/
 
 		livePlayerParty = Instantiate(playerParty).GetComponent<PlayerParty>();
 		liveEnemyParty = Instantiate(enemyParty).GetComponent<EnemyParty>();
@@ -120,6 +124,7 @@ public class BattleManager : MonoBehaviour {
 		hitting = true;
 		instance.anim.Play("Hit", -1, 0f);
 		instance.hit.transform.position = t.position;
+		instance.hitAudio.Play();
 
 		//decrease target life
 		Character c = GetMemberCharacter(chosenTarget.GetName());

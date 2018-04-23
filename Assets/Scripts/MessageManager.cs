@@ -19,6 +19,16 @@ public class MessageManager : MonoBehaviour {
 	static string[] choices;
 	static int currentChoice;
 	static string chosenChoice;
+	AudioSource cursorAudio;
+	AudioSource selectAudio;
+	AudioSource messageAudio;
+
+	void Awake(){
+		AudioSource[] audio = GetComponents<AudioSource>();
+		cursorAudio = audio[0];
+		selectAudio = audio[1];
+		messageAudio = audio[2];
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,6 +38,7 @@ public class MessageManager : MonoBehaviour {
 			mMsgText.text = message;
 			mBox.SetActive(true);
 			if(Input.GetKeyDown(KeyCode.Space)){
+				messageAudio.Play();
 				showingMessage = false;
 			}
 		}else{
@@ -46,14 +57,17 @@ public class MessageManager : MonoBehaviour {
 
 			//move cursor
 			if(Input.GetKeyDown(KeyCode.LeftArrow)){
+				cursorAudio.Play();
 				--currentChoice;
 				if(currentChoice<0) currentChoice += choices.Length;
 			}
 			if(Input.GetKeyDown(KeyCode.RightArrow)){
+				cursorAudio.Play();
 				++currentChoice;
 				if(currentChoice>=choices.Length) currentChoice -= choices.Length;
 			}
 			if(Input.GetKeyDown(KeyCode.Space)){
+				selectAudio.Play();
 				chosenChoice = choices[currentChoice];
 				showingChoices = false;
 			}

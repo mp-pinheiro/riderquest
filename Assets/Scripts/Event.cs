@@ -120,7 +120,8 @@ public class Event : MonoBehaviour {
 	IEnumerator HouseAssault2Routine(){
 		yield return MessageManager.ShowMessage(Global.blackName, "We don't have to do this. Just tell us where it is.");
 		Global.ancientAppears = true;
-		yield return transform.GetChild(1).GetChild(0).GetComponent<Manipulator>().MoveTo(new Vector2(1.05f, -19.44f), 1.0f);
+		Transform ancient = transform.GetChild(1).GetChild(0);
+		yield return ancient.GetComponent<Manipulator>().MoveTo(new Vector2(1.05f, -19.44f), 1.0f);
 		yield return MessageManager.ShowMessage(Global.ancientName, "Come on, " + Global.playerName + ", we have to go.");
 		yield return MessageManager.ShowMessage(Global.playerName, Global.ancientName + ", you have to help my father! They have my mom!");
 		yield return MessageManager.ShowMessage(Global.ancientName, "Let's go, I said!");
@@ -130,6 +131,21 @@ public class Event : MonoBehaviour {
 		yield return MessageManager.ShowMessage(Global.blackName, "Get rid of them.");
 		yield return MessageManager.ShowMessage(Global.playerName, "NO! DAD!");
 		yield return MessageManager.ShowMessage(Global.ancientName, "I am sorry, my child, I have to keep you safe.");
+		ancient.GetComponent<AudioSource>().Play();
+		ScreenHider.HideScreen();
+		yield return new WaitForSeconds(1f);
 		GetComponentInChildren<AudioSource>().Play();
+		yield return new WaitForSeconds(3f);
+		SceneManager.LoadScene("dream");
+	}
+
+	public void Dream2(){
+		StartCoroutine(Dream2Routine());
+	}
+	IEnumerator Dream2Routine(){
+		yield return MessageManager.ShowMessage("Voice", "They still don't have it... I couldn't give it to them.");
+		yield return MessageManager.ShowMessage("Voice", "Son. You have to keep it safe. They must not have it.");
+		yield return MessageManager.ShowMessage("Voice", "You must protect it. Find " + Global.friendName + "...");
+		SceneManager.LoadScene("bedroom");
 	}
 }

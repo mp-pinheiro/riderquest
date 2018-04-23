@@ -9,20 +9,23 @@ public class Car : MonoBehaviour {
 	float turn = 200f;
 	float driftTurn = 0.5f;
 	float dritfSpeed = 3f;
-	bool drifting;
-	bool turning;
+	bool drifting, turning, accelerating;
 	public GameObject spriteObject;
 	Animator anim;
 	ParticleSystem particle;
 	protected Rigidbody2D rb;
+	AudioSource accelSound;
+	AudioSource driftSound;
 
 	protected virtual void Awake(){
 		rb = GetComponent<Rigidbody2D>();
 		rb.drag = 1f;
 		reverseAccel = acceleration/5f;
-		drifting = false;
 		anim = spriteObject.GetComponent<Animator>();
 		particle = GetComponentInChildren<ParticleSystem>();
+		AudioSource[] audio = GetComponents<AudioSource>();
+		accelSound = audio[0];
+		driftSound = audio[1];
 	}
 
 	protected virtual void Update(){
@@ -34,22 +37,6 @@ public class Car : MonoBehaviour {
 		int exactAngle = 45*Mathf.RoundToInt(rb.rotation/45f)%360;
 		spriteObject.transform.rotation = Quaternion.Euler(0f, 0f, rb.rotation-exactAngle);
 		anim.SetFloat("angle", rb.rotation);
-
-		//loop
-		/*
-		if(rb.position.x<-9f){
-			rb.position = new Vector2(rb.position.x+18f, rb.position.y);
-		}
-		if(rb.position.x>9f){
-			rb.position = new Vector2(rb.position.x-18f, rb.position.y);
-		}
-		if(rb.position.y<-5f){
-			rb.position = new Vector2(rb.position.x, rb.position.y+10f);
-		}
-		if(rb.position.y>5f){
-			rb.position = new Vector2(rb.position.x, rb.position.y-10f);
-		}
-		*/
 	}
 
 	protected virtual void FixedUpdate () {
@@ -63,8 +50,29 @@ public class Car : MonoBehaviour {
 			drifting = false;
 		}
 		
+		//emit particles
 		var em = particle.emission;
 		em.enabled = drifting;
+
+		//play/stop sounds
+		if(accelerating){
+			if(accelSound.isPlaying){
+				accelSound.UnPause();
+			}else{
+				accelSound.Play();
+			}
+		}else{
+			accelSound.Pause();
+		}
+		if(drifting){
+			if(driftSound.isPlaying){
+				driftSound.UnPause();
+			}else{
+				driftSound.Play();
+			}
+		}else{
+			driftSound.Pause();
+		}
 	}
 
 	void LateUpdate(){
@@ -72,6 +80,7 @@ public class Car : MonoBehaviour {
 	}
 
 	protected void Accelerate(){
+		accelerating = true;
 		rb.AddForce(GetDirection()*acceleration);
 	}
 	protected void Reverse(){
@@ -101,8 +110,19 @@ public class Car : MonoBehaviour {
 		turning = false;
 	}
 
+	protected void StopAccelerating(){
+		accelerating = false;
+	}
+
 	Vector2 GetDirection(){
 		float angle = rb.rotation*Mathf.PI/180f;
 		return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+	}
+
+	public void StopTime(){
+		StopAccelerating();
+		StopTurning();
+		accelSound.Pause();
+		driftSound.Pause();
 	}
 }
