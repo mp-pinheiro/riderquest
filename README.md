@@ -20,6 +20,7 @@ We messed up. Heavily. Game sucks, but it was a very fun experience. Everything 
 ## Links
 + Source can be found on [GitHub](https://github.com/mp-pinheiro)
 + Download of the game can be found on the [Release Page](https://github.com/mp-pinheiro/riderquest/releases/tag/0.0.1). Just download "riderquest-0.0.1.7z", extract it, and play it.
++ The Battle Theme Song can be listened to on [BandCamp](https://yfritgames.bandcamp.com/track/riderquest-battle-theme). It's free to download and use!
 
 ## Disclaimers
 + This is a highly unfinished game. See post below for more info.
