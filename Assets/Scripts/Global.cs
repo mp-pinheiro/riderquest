@@ -24,6 +24,7 @@ public class Global : MonoBehaviour {
 	public static bool talkedToAncient;
 	public static bool foundGreen;
 	public static bool greenJoins;
+    public static bool witchAppears;
 	public static bool witchDead;
 
 	public static object GetValue(string key){
