@@ -20,7 +20,7 @@ public class PlayerParty : MonoBehaviour {
 		//create characters if they don't exist
 		if(characters==null){
 			characters = new Character[5];
-			characters[0] = new Character(Global.playerName, 2, 10); //player
+			characters[0] = new Character(Global.playerName, 3, 10); //player
 			characters[1] = new Character(Global.fatherName, 40, 60); //father
 			characters[2] = new Character(Global.greenName, 3, 10); //green
 			characters[3] = new Character(Global.strangerName, 2, 10); //stranger
