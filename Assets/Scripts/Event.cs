@@ -286,11 +286,11 @@ public class Event : MonoBehaviour {
     }
     IEnumerator TealPrizeRoutine(GameObject go)
     {
-        var option = Random.Range(1, 3);
+        var option = Random.Range(1, 4);
         switch(option)
         {
             case 1:
-                yield return MessageManager.ShowMessage("God", "Teal gives chat 500 coins.");
+                yield return MessageManager.ShowMessage("God", "Teal gives chat 1000 coins.");
                 break;
             case 2:
                 yield return MessageManager.ShowMessage("God", "Fairfruit gifts 2 subs.");
